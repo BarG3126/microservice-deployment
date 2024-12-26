@@ -1,8 +1,11 @@
-.PHONY: run install clean check runner
-.DEFAULT_GOAL := runner
+.PHONY: run_builder run_inference install clean check runner_builder runner_inference
+.DEFAULT_GOAL := runner_inference
 
-run: install
-	cd src && poetry run python runner.py
+run_builder: install
+	cd src && poetry run python runner_builder.py
+
+run_inference: install
+	cd src && poetry run python runner_inference.py
 
 install: pyproject.toml
 	poetry install --no-root
@@ -17,4 +20,6 @@ endif
 check:
 	poetry run flake8 src/
 
-runner: check run clean
+runner_builder: check run_builder clean
+
+runner_inference: check run_inference clean
