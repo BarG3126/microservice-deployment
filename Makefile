@@ -15,6 +15,6 @@ else
 endif
 
 check:
-	poetry run flake8 src\
+	poetry run flake8 src/
 
 runner: check run clean
